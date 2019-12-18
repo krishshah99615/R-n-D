@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voice Precription</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap');
+        *{
+            background: #333;
+            padding: 0;
+            margin: 0;
+        }
+        body{
+             margin:0;
+            padding:0;
+            min-height: 100vh;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          
+            
+            
+        }
+        .row{
+            display: flex;
+            justify-content: space-around;
+            margin-top:50px;
+            
+        }
+        button{
+            padding: 10px 20px 10px 20px;
+            border:none;
+            border-radius: 50px;
+           
+            font-family: 'Rubik',sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            
+        }
+        
+       div #record{
+             color: black;
+            background: aqua;
+        }
+        
+        div #record:hover     {
+            background: teal;
+            color: white;
+        }
+         div #stop{
+             color: black;
+            background:red ;
+        }
+        
+        div #stop:hover     {
+            background: maroon;
+            color: white;
+        }
+        .col{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around
+        }
+    </style>
+</head>
+<body>
+   <div class="col">
+       
+       <div id="canvasCustom">
+           
+       </div>
+        <div class="row">
+            <button id="record">Record</button>
+            <button id="stop">Stop</button> 
+        </div>
+   </div>
+   
+    
+    
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js" integrity="sha256-8IAwtdm0tRSYpMA1G5K1jpeHZq1N02yrdpoBteVVuMc=" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js" integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM=" crossorigin="anonymous"></script>  
+    
+    <script>
+    let mic,recorder,soundfile,micLevel;
+    
+    const r_button = document.getElementById('record');
+ const s_button = document.getElementById('stop');    
+   
+    r_button.addEventListener("click", function(){
+        console.log("Starting recording");
+        r();
+        
+         });
+     s_button.addEventListener("click", function(){
+        console.log("Stopping recording");
+        s();
+        
+         });    
+        function setup()
+        {
+            mic = new p5.AudioIn();
+            recorder = new p5.SoundRecorder();
+            soundfile = new p5.SoundFile();
+            
+            recorder.setInput(mic);
+           var c= createCanvas(200,200);
+            c.parent("canvasCustom");
+        }
+        function draw(){
+            background(0);
+            
+            
+            micLevel = mic.getLevel();
+            console.log(micLevel);
+  ellipse(100,100,200*micLevel,200*micLevel);
+        }
+        
+        function r(){
+            mic.start();
+            getAudioContext().resume();
+            recorder.record(soundfile);
+            
+        }
+        
+      function s(){
+          mic.stop();
+          recorder.stop();
+          
+      }
+       
+        
+        
+        
+   
+    </script>
+    
+    
+</body>
+</html>

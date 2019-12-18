@@ -18,7 +18,7 @@
     
 let mic;
 function setup(){
-    touchStarted();
+     getAudioContext().resume();
   mic = new p5.AudioIn()
   mic.start();
     createCanvas(200,200)
@@ -28,8 +28,7 @@ function draw(){
   micLevel = mic.getLevel();
   ellipse(width/2, constrain(height-micLevel*height*5, 0, height), 10, 10);
 }
-function touchStarted()
-        { getAudioContext().resume(); } 
+
     </script>
 </body>
 </html>
