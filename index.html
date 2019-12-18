@@ -74,16 +74,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js" integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM=" crossorigin="anonymous"></script>  
     
     <script>
-    let mic,recorder,soundfile;
+    let mic,recorder,soundfile,vol;
     
     const r_button = document.getElementById('record');
-    
+ const s_button = document.getElementById('stop');    
    
     r_button.addEventListener("click", function(){
         console.log("Starting recording");
         r();
         
          });
+     s_button.addEventListener("click", function(){
+        console.log("Stopping recording");
+        s();
+        
+         });    
         function setup()
         {
             mic = new p5.AudioIn();
@@ -91,14 +96,27 @@
             soundfile = new p5.SoundFile();
             
             recorder.setInput(mic);
+            createCanvas(200,200);
+        }
+        function draw(){
+            background(0);
+            vol=mic.getLevel();
+            console.log(vol);
+            ellipse(100,100,vol*20,vol*20);
         }
         
         function r(){
             mic.start();
             recorder.record(soundfile);
+            
         }
         
-      
+      function s(){
+          mic.stop();
+          recorder.stop();
+          
+      }
+       
         
         
         
