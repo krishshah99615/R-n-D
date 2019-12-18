@@ -74,7 +74,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js" integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM=" crossorigin="anonymous"></script>  
     
     <script>
-    let mic,recorder,soundfile,vol;
+    let mic,recorder,soundfile,micLevel;
     
     const r_button = document.getElementById('record');
  const s_button = document.getElementById('stop');    
@@ -100,9 +100,11 @@
         }
         function draw(){
             background(0);
-            vol=mic.getLevel();
-            console.log(vol);
-            ellipse(100,100,vol*20,vol*20);
+            
+            
+            micLevel = mic.getLevel();
+            console.log(micLevel);
+  ellipse(width/2, constrain(height-micLevel*height*5, 0, height), 10, 10);
         }
         
         function r(){
