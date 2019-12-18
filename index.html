@@ -122,6 +122,7 @@
         
         function r(){
             mic.start();
+            getAudioContext().resume();
             recorder.record(soundfile);
             
         }

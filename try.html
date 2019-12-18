@@ -7,13 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js" integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM=" crossorigin="anonymous"></script>  
 
 <style>
-    
-    
-    canvas{
-        
-        margin-top: 500px;
-        
-    }
+ 
     
     </style>
 </head>
@@ -24,6 +18,7 @@
     
 let mic;
 function setup(){
+    touchStarted();
   mic = new p5.AudioIn()
   mic.start();
     createCanvas(200,200)
@@ -33,7 +28,8 @@ function draw(){
   micLevel = mic.getLevel();
   ellipse(width/2, constrain(height-micLevel*height*5, 0, height), 10, 10);
 }
-
+function touchStarted()
+        { getAudioContext().resume(); } 
     </script>
 </body>
 </html>
