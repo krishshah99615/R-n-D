@@ -2,40 +2,109 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>R nD</title>
+    <title>Voice Precription</title>
     
     <style>
-    
-    
-    
+        @import url('https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap');
+        *{
+            background: #333;
+            padding: 0;
+            margin: 0;
+        }
+        body{
+             margin:0;
+            padding:0;
+            min-height: 100vh;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          
+            
+            
+        }
+        .row{
+            display: flex;
+            justify-content: space-around;
+            
+        }
+        button{
+            padding: 10px 20px 10px 20px;
+            border:none;
+            border-radius: 50px;
+           
+            font-family: 'Rubik',sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: 20px;
+        }
+        
+       div #record{
+             color: black;
+            background: aqua;
+        }
+        
+        div #record:hover     {
+            background: teal;
+            color: white;
+        }
+         div #stop{
+             color: black;
+            background:red ;
+        }
+        
+        div #stop:hover     {
+            background: maroon;
+            color: white;
+        }
     
     </style>
 </head>
-
-<h2 id="disp">
-    
-</h2>
-
 <body>
+    <div class="row">
+       <button id="record">Record</button>
+     <button id="stop">Stop</button> 
+    </div>
     
     
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js" integrity="sha256-8IAwtdm0tRSYpMA1G5K1jpeHZq1N02yrdpoBteVVuMc=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js" integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM=" crossorigin="anonymous"></script>
-   <script>
-    var mic;
-       function setup(){
-           mic = new p5.AudioIn();
-           mic.start();
-       }
     
-    function draw(){
-        var vol=mic.getLevel();
-        console.log(vol);
-        let a=document.getElementById('disp')
-        a.textContent=vol;
-    }
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js" integrity="sha256-8IAwtdm0tRSYpMA1G5K1jpeHZq1N02yrdpoBteVVuMc=" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js" integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM=" crossorigin="anonymous"></script>  
+    
+    <script>
+    let mic,recorder,soundfile;
+    
+    const r_button = document.getElementById('record');
+    
+   
+    r_button.addEventListener("click", function(){
+        console.log("Starting recording");
+        r();
+        
+         });
+        function setup()
+        {
+            mic = new p5.AudioIn();
+            recorder = new p5.SoundRecorder();
+            soundfile = new p5.SoundFile();
+            
+            recorder.setInput(mic);
+        }
+        
+        function r(){
+            mic.start();
+            recorder.record(soundfile);
+        }
+        
+      
+        
+        
+        
+   
     </script>
+    
+    
 </body>
 </html>
