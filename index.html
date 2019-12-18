@@ -12,6 +12,9 @@
     </style>
 </head>
 
+<h2 id="disp">
+    
+</h2>
 
 <body>
     
@@ -29,6 +32,8 @@
     function draw(){
         var vol=mic.getLevel();
         console.log(vol);
+        let a=document.getElementById('disp')
+        a.textContent=vol;
     }
     
     </script>
